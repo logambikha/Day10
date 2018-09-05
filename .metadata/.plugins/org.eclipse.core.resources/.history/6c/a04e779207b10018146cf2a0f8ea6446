@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Registration Page</title>
+</head>
+<body>
+<form action="registration" method="post">
+<label>Username: </label>
+<input type="text" name="Username"size="15"/>
+<br> <br>
+
+<label>Password: </label>
+<input type="text" password="Password:"size="15"/>
+<br> <br>
+
+<input type="submit" value="Register"/>
+<input type="reset" value="Clear"/>
+<br> <br>
+</form>
+</body>
+</html>
