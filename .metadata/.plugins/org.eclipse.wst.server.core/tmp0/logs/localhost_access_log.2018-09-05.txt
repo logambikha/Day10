@@ -106,3 +106,8 @@
 0:0:0:0:0:0:0:1 - - [05/Sep/2018:08:58:28 -0400] "POST /LoginApp/registration HTTP/1.1" 200 80
 0:0:0:0:0:0:0:1 - - [05/Sep/2018:08:58:28 -0400] "GET /LoginApp/login.html HTTP/1.1" 304 -
 0:0:0:0:0:0:0:1 - - [05/Sep/2018:08:58:32 -0400] "POST /LoginApp/login HTTP/1.1" 200 74
+0:0:0:0:0:0:0:1 - - [05/Sep/2018:23:49:33 -0400] "GET /LoginApp/ HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [05/Sep/2018:23:49:36 -0400] "GET /LoginApp/registration.html HTTP/1.1" 200 446
+0:0:0:0:0:0:0:1 - - [05/Sep/2018:23:49:41 -0400] "POST /LoginApp/registration HTTP/1.1" 200 80
+0:0:0:0:0:0:0:1 - - [05/Sep/2018:23:49:43 -0400] "GET /LoginApp/login.html HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [05/Sep/2018:23:49:47 -0400] "POST /LoginApp/login HTTP/1.1" 500 1456

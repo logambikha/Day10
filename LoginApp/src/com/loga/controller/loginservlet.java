@@ -33,11 +33,11 @@ public class loginservlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		resp.setContentType("text/html");
+		response.setContentType("text/html");
 		
-		PrintWriter out = resp.getWriter();
-		String username= req.getParameter("username");
-		String password= req.getParameter("password");
+		PrintWriter out = response.getWriter();
+		String username= request.getParameter("username");
+		String password= request.getParameter("password");
 		
 		users = (HashMap<String,String>)context.getAttribute("usersData");
 		
