@@ -1,6 +1,5 @@
 package com.loga.employeeapp.controller;
 
-
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -13,24 +12,35 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.loga.employeeapp.dao.EmployeeDao;
-import com.loga.employeeapp.dao.impl.EmployeeDaoImpl;
 import com.loga.employeeapp.domain.Employee;
 
-@WebServlet("/addEmployee")
-public class AddEmployeeController extends HttpServlet {
+@WebServlet("/editEmployee")
+public class EditEmployeeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private EmployeeDao employeeDao;
+	private Employee employee;
 	private ServletContext context;
-	
+	private EmployeeDao employeeDao;
 
-	public AddEmployeeController() {
+	public EditEmployeeController() {
 		super();
-		employeeDao= new EmployeeDaoImpl();
 	}
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		context = config.getServletContext();
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		long id = Long.parseLong(request.getParameter("id"));
+		employeeDao = (EmployeeDao) context.getAttribute("employeeDao");
+
+		employee = employeeDao.findEmployeeById(id);
+
+		request.setAttribute("editEmployee", employee);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("editEmployee.jsp");
+		dispatcher.forward(request, response);
+
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -39,20 +49,16 @@ public class AddEmployeeController extends HttpServlet {
 		String employeeName = request.getParameter("empName");
 		double employeeSalary = Double.parseDouble(request.getParameter("empSalary"));
 		String employeeDepartment = request.getParameter("empDepartment");
-		request.setAttribute("exits", false);
-		Employee employee = new Employee(employeeId, employeeName, employeeSalary, employeeDepartment);
-		context.setAttribute("employeeDao", employeeDao);
-		if (employeeDao.addEmployee(employee)) {
-//			RequestDispatcher dispatcher = request.getRequestDispatcher("displayEmployees");
-//			
-//			dispatcher.forward(request, response);
-			response.sendRedirect("displayEmployees");
 
-		} else {
-			request.setAttribute("exists", true);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("addEmployee.jsp");
-			dispatcher.forward(request, response);
-		}
+		employeeDao = (EmployeeDao) context.getAttribute("employeeDao");
+
+		employee = employeeDao
+				.updateEmployee(new Employee(employeeId, employeeName, employeeSalary, employeeDepartment));
+		request.setAttribute("edited", true);
+		request.setAttribute("editEmployee", employee);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("editEmployee.jsp");
+		dispatcher.forward(request, response);
+
 	}
 
 }
